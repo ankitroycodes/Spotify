@@ -70,7 +70,7 @@ a{
     left: 0;
     width: 100%;
     height: 100%;
-    object-fit: cover; /* Ensures the image covers the div while maintaining aspect ratio */
+    object-fit: cover;
     z-index: -1;
 }
 
@@ -93,7 +93,7 @@ a{
 
 .song {
     display: grid;
-    grid-template-columns: 1fr auto auto; /* 1fr for name, auto for other elements */
+    grid-template-columns: 1fr auto auto;
     align-items: center;
     background-color: #212121;
     height: 45px;
@@ -102,40 +102,38 @@ a{
     box-sizing: border-box;
     border-radius: 10px;
     margin: 20px;
-    grid-column-gap: 20px; /* Add gap between columns (cells) */
-    transition: height 0.3s ease; /* Smooth height change */
+    grid-column-gap: 20px;
+    transition: height 0.3s ease;
 }
 
 .seek_slider {
-    width: 100%; /* Ensure slider takes full width */
-    margin-top: 10px;
     -webkit-appearance: none;
     appearance: none;
+    width: 100%;
     height: 5px;
     background: #ddd;
     border-radius: 5px;
+    margin-bottom: 10px;
     outline: none;
-    display: none; /* Initially hidden */
+    display: none;
 }
 
 .seek_slider::-webkit-slider-thumb {
     -webkit-appearance: none;
     appearance: none;
-    width: 15px;
-    height: 15px;
-    background: #4CAF50;
-    cursor: pointer;
+    width: 10px;
+    height: 10px;
+    background: #1CAC4F;
     border-radius: 50%;
-    border: none;
+    cursor: pointer;
 }
 
 .seek_slider::-moz-range-thumb {
-    width: 15px;
-    height: 15px;
-    background: #4CAF50;
-    cursor: pointer;
+    width: 10px;
+    height: 10px;
+    background: #1CAC4F;
     border-radius: 50%;
-    border: none;
+    cursor: pointer;
 }
 
 .label {
