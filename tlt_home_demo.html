@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,6 +8,7 @@
     <link rel="stylesheet" href="tlt_home_demo.css">
     <title>The Local Train - Home Demos</title>
 </head>
+
 <body>
     <div class="sidebar">
         <div class="sb1">
@@ -25,7 +27,9 @@
         <div class="head_img">
             <div class="head_img_text">
                 <h2>The Local Train Archives - Home Demos</h2>
-                <p>This collection includes early home demos from The Local Train, recorded during their formative years. These raw, unrefined sessions offer a glimpse into the band's creative process and evolving sound.</p>
+                <p>This collection includes early home demos from The Local Train, recorded during their formative
+                    years. These raw, unrefined sessions offer a glimpse into the band's creative process and evolving
+                    sound.</p>
             </div>
             <div class="play"></div>
             <img src="ui elements/tlt_banner.jpg" alt="Banner">
@@ -46,7 +50,8 @@
             <button class="song_play_btn" data-audio="kaise-jiyun-acoustic">
                 <img class="play_triangle" src="ui elements/triangle.svg" alt="Play">
             </button>
-            <audio id="kaise-jiyun-acoustic" src="songs/tlt home demo/Kaise Jiyun  ( Acoustic Version) By The Local Train (HQ).mp3"></audio>
+            <audio id="kaise-jiyun-acoustic"
+                src="songs/tlt home demo/Kaise Jiyun  ( Acoustic Version) By The Local Train (HQ).mp3"></audio>
             <input type="range" class="seek_slider" min="0" max="100" value="0" step="0.1">
         </div>
         <div class="song">
@@ -64,60 +69,57 @@
             <button class="song_play_btn" data-audio="choo-lo-home-demo">
                 <img class="play_triangle" src="ui elements/triangle.svg" alt="Play">
             </button>
-            <audio id="choo-lo-home-demo" src="path/to/choo-lo-home-demo.mp3"></audio>
+            <audio id="choo-lo-home-demo" src="songs/tlt home demo/Choo Lo  - Home Demo.mp3"></audio>
             <input type="range" class="seek_slider" min="0" max="100" value="0" step="0.1">
         </div>
     </div>
-
     <script>
-        document.querySelectorAll('.song_play_btn').forEach(button => {
-            button.addEventListener('click', function () {
-                const songDiv = this.closest('.song'); // Get the parent song div
-                const slider = songDiv.querySelector('.seek_slider'); // Get the slider
-                const audioId = this.getAttribute('data-audio'); // Get corresponding audio ID
-                const audio = document.getElementById(audioId); // The corresponding audio element
-                const playIcon = this.querySelector('img'); // The play/pause icon image
-            
-                // Pause all other audios and reset their buttons and sliders
-                document.querySelectorAll('audio').forEach(a => {
-                    if (a !== audio) {
-                        a.pause();
-                        a.currentTime = 0; // Reset audio
-                        const parentDiv = a.closest('.song');
-                        const parentSlider = parentDiv.querySelector('.seek_slider');
-                        parentSlider.style.display = 'none';
-                        parentDiv.style.height = '45px'; // Reset the height of other songs
-                        const parentButton = parentDiv.querySelector('.song_play_btn img');
-                        parentButton.src = 'ui elements/triangle.svg'; // Set back to play icon
+        document.querySelectorAll('.song').forEach(songDiv => {
+            const audio = songDiv.querySelector('audio');
+            const playButton = songDiv.querySelector('.song_play_btn');
+            const slider = songDiv.querySelector('.seek_slider');
+
+            playButton.addEventListener('click', () => {
+                document.querySelectorAll('audio').forEach(otherAudio => {
+                    if (otherAudio !== audio && !otherAudio.paused) {
+                        otherAudio.pause();
+                        const otherPlayButton = otherAudio.closest('.song').querySelector('.song_play_btn img');
+                        otherPlayButton.src = 'ui elements/triangle.svg';
+                        const otherSlider = otherAudio.closest('.song').querySelector('.seek_slider');
+                        otherSlider.style.display = 'none';
+                        otherAudio.closest('.song').style.height = '45px';
                     }
                 });
-            
-                // Toggle play/pause for the clicked song
+
                 if (audio.paused) {
                     audio.play();
-                    playIcon.src = 'ui elements/pause.svg'; // Change to pause icon
-                    slider.style.display = 'block'; // Show the slider
-                    songDiv.style.height = '75px'; // Increase height to fit slider
+                    playButton.querySelector('img').src = 'ui elements/pause.svg';
+                    slider.style.display = 'block';
+                    songDiv.style.height = '75px';
                 } else {
                     audio.pause();
-                    playIcon.src = 'ui elements/triangle.svg'; // Change back to play icon
-                    slider.style.display = 'none'; // Hide the slider
-                    songDiv.style.height = '45px'; // Reset height
+                    playButton.querySelector('img').src = 'ui elements/triangle.svg';
+                    slider.style.display = 'none';
+                    songDiv.style.height = '45px';
                 }
-            
-                // Update the slider's position as the audio plays
-                audio.addEventListener('timeupdate', () => {
-                    const value = (audio.currentTime / audio.duration) * 100;
-                    slider.value = value; // Update the slider position
-                });
-            
-                // Allow seeking through the song by dragging the slider
-                slider.addEventListener('input', () => {
-                    audio.currentTime = (slider.value / 100) * audio.duration; // Adjust audio time
-                });
             });
+
+            audio.addEventListener('timeupdate', () => {
+                const value = (audio.currentTime / audio.duration) * 100;
+                slider.value = value;
+                slider.style.background = `linear-gradient(to right, #1CAC4F ${value}%, #ddd ${value}%)`; // Update slider color (green for played, gray for unplayed)
+            });
+
+            slider.addEventListener('input', () => {
+                audio.currentTime = (slider.value / 100) * audio.duration;
+                const value = slider.value;
+                slider.style.background = `linear-gradient(to right, #1CAC4F ${value}%, #ddd ${value}%)`; // Update the slider color (green for played, gray for unplayed)
+            });
+
+            slider.style.display = 'none';
         });
 
     </script>
 </body>
+
 </html>
