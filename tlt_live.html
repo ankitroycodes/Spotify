@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="tlt_live.css">
+    <title>The Local Train - Home Demos</title>
+</head>
+
+<body>
+    <div class="sidebar">
+        <div class="sb1">
+            <a href="home.html">Home</a>
+            <a href="explore.html">Discover New</a>
+        </div>
+        <div class="sb2">
+            <a href="tlt_home_demo.html">Playlist 1</a>
+            <a href="tlt_live.html">Playlist 2</a>
+        </div>
+        <div class="sb3">
+            <a href="#">Log Out</a>
+        </div>
+    </div>
+    <div class="home_body">
+        <div class="head_img">
+            <div class="head_img_text">
+                <h2>Origins - The Local Train Live</h2>
+                <p>This collection features live versions of some songs by The Local Train, recorded during their concerts. These early performances show the songs before they were changed and officially released, giving a unique look at the band's evolving sound.</p>
+            </div>
+            <div class="play"></div>
+            <img src="ui elements/tlt_live_banner.jpg" alt="Banner">
+        </div>
+        <div class="song">
+            <div class="cell label">Choo Lo (Demo) - Live</div>
+            <div class="cell label">July 9, 2011</div>
+            <button class="song_play_btn" data-audio="choo-lo">
+                <img class="play_triangle" src="ui elements/triangle.svg" alt="Play">
+            </button>
+            <audio id="choo-lo" src="songs/tlt origins live/choo_lo_live.mp3"></audio>
+            <input type="range" class="seek_slider" min="0" max="100" value="0" step="0.1">
+
+        </div>
+        <div class="song">
+            <div class="cell label">Kaise Jiyun (Demo) - Live</div>
+            <div class="cell label">July 9, 2011</div>
+            <button class="song_play_btn" data-audio="kaise-jiyun">
+                <img class="play_triangle" src="ui elements/triangle.svg" alt="Play">
+            </button>
+            <audio id="kaise-jiyun" src="songs/tlt origins live/kasie_jiyun_live.mp3"></audio>
+            <input type="range" class="seek_slider" min="0" max="100" value="0" step="0.1">
+        </div>
+        <div class="song">
+            <div class="cell label">Aaoge Tum Kabhi (Demo) - Live</div>
+            <div class="cell label">July 9, 2011</div>
+            <button class="song_play_btn" data-audio="aaoge-tum-kabhi">
+                <img class="play_triangle" src="ui elements/triangle.svg" alt="Play">
+            </button>
+            <audio id="aaoge-tum-kabhi" src="songs/tlt origins live/aaoge_tum_kabhi_live.mp3"></audio>
+            <input type="range" class="seek_slider" min="0" max="100" value="0" step="0.1">
+        </div>
+        <div class="song">
+            <div class="cell label">Manzil (Demo) - Live</div>
+            <div class="cell label">July 9, 2011</div>
+            <button class="song_play_btn" data-audio="yeh-zindagi-hai">
+                <img class="play_triangle" src="ui elements/triangle.svg" alt="Play">
+            </button>
+            <audio id="yeh-zindagi-hai" src="songs/tlt origins live/manzil_live.mp3"></audio>
+            <input type="range" class="seek_slider" min="0" max="100" value="0" step="0.1">
+        </div>
+    </div>
+    <script>
+        document.querySelectorAll('.song').forEach(songDiv => {
+            const audio = songDiv.querySelector('audio');
+            const playButton = songDiv.querySelector('.song_play_btn');
+            const slider = songDiv.querySelector('.seek_slider');
+
+            playButton.addEventListener('click', () => {
+                document.querySelectorAll('audio').forEach(otherAudio => {
+                    if (otherAudio !== audio && !otherAudio.paused) {
+                        otherAudio.pause();
+                        const otherPlayButton = otherAudio.closest('.song').querySelector('.song_play_btn img');
+                        otherPlayButton.src = 'ui elements/triangle.svg';
+                        const otherSlider = otherAudio.closest('.song').querySelector('.seek_slider');
+                        otherSlider.style.display = 'none';
+                        otherAudio.closest('.song').style.height = '45px';
+                    }
+                });
+
+                if (audio.paused) {
+                    audio.play();
+                    playButton.querySelector('img').src = 'ui elements/pause.svg';
+                    slider.style.display = 'block';
+                    songDiv.style.height = '75px';
+                } else {
+                    audio.pause();
+                    playButton.querySelector('img').src = 'ui elements/triangle.svg';
+                    slider.style.display = 'none';
+                    songDiv.style.height = '45px';
+                }
+            });
+
+            audio.addEventListener('timeupdate', () => {
+                const value = (audio.currentTime / audio.duration) * 100;
+                slider.value = value;
+                slider.style.background = `linear-gradient(to right, #1CAC4F ${value}%, #ddd ${value}%)`; // Update slider color (green for played, gray for unplayed)
+            });
+
+            slider.addEventListener('input', () => {
+                audio.currentTime = (slider.value / 100) * audio.duration;
+                const value = slider.value;
+                slider.style.background = `linear-gradient(to right, #1CAC4F ${value}%, #ddd ${value}%)`; // Update the slider color (green for played, gray for unplayed)
+            });
+
+            slider.style.display = 'none';
+        });
+
+    </script>
+</body>
+
+</html>

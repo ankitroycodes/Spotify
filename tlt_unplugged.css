@@ -1,0 +1,159 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+body{
+    font-family: Poppins, sans-serif;
+    background-color: #181818;
+}
+
+a{
+    text-decoration: none;
+}
+
+.sidebar{
+    background-color: #282828;
+    height: 100vh;
+    width: 175px;
+    display: flex;
+    position: fixed;
+    flex-direction: column;
+    align-items: center;
+    z-index: 100;
+}
+
+.sidebar a{
+    color: #ffffff;
+    text-decoration: none;
+    margin-bottom: 15px;
+    font-size: 15px;
+}
+
+.sb1, .sb2, .sb3{
+    width: 120px;
+    display: flex;
+    flex-direction: column;
+}
+
+.sb1 a, .sb2 a, .sb3 a{
+    font-size: 12.5px;
+}
+
+.sb1{
+    margin-top: 30px;
+}
+
+.sb3{
+    margin-top: auto;
+    margin-bottom: 30px;
+}
+
+.home_body{
+    margin-left: 175px;
+    height: auto;
+}
+
+.head_img{
+    position: relative;
+    display: flex;
+    height: 200px;
+    width: auto;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.05));
+    overflow: hidden;
+    padding: 30px;
+}
+
+.head_img img{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1;
+}
+
+.head_img_text{
+    width: 60vw;
+    margin-top: auto;
+}
+
+.head_img_text h2{
+    color: #f1f1f1;
+    font-weight: 500;
+}
+
+.head_img_text p{
+    color: #d8d8d8;
+    margin-top: 8px;
+    font-weight: 400;
+    font-size: 13px;
+}
+
+.song {
+    display: grid;
+    grid-template-columns: 1fr auto auto;
+    align-items: center;
+    background-color: #212121;
+    height: 45px;
+    margin-top: 10px;
+    padding: 0 15px;
+    box-sizing: border-box;
+    border-radius: 10px;
+    margin: 20px;
+    grid-column-gap: 20px;
+    transition: height 0.3s ease;
+}
+
+.seek_slider {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+    height: 5px;
+    background: #ddd;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    outline: none;
+    display: none;
+}
+
+.seek_slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 10px;
+    height: 10px;
+    background: #1CAC4F;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.seek_slider::-moz-range-thumb {
+    width: 10px;
+    height: 10px;
+    background: #1CAC4F;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.label {
+    font-size: 12.5px;
+    color: #d4d4d4;
+    white-space: nowrap;
+}
+
+.song_play_btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 30px;
+    width: 30px;
+    border: none;
+    border-radius: 15px;
+    background-color: #1CAC4F;
+    cursor: pointer;
+}
+
+.play_triangle{
+    height: 12px;
+}
