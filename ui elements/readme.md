@@ -1,0 +1,1 @@
+This project is a music player interface created using HTML and CSS. It is developed solely for non-commercial and educational purposes. The focus is on building a clean, modern user interface that allows users to interact with basic music player features, such as play, pause, forward, rewind, and track navigation.
